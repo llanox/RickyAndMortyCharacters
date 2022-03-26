@@ -8,15 +8,66 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/character_list_recycle"
         android:layout_width="402dp"
-        android:layout_height="594dp"
+        android:layout_height="520dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/league_dropdown_list" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_margin="20sp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_list_recycle">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="@string/money_symbol"/>
+        <TextView
+            android:id="@+id/item_total_price"
+            android:layout_weight="0.45"
+            android:layout_width="0dp"
+            android:text="@string/zero"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginStart="5sp"/>
+
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pay"
+                android:textStyle="bold"
+                android:textSize="25sp"/>
+
+            <ImageButton
+                android:id="@+id/btn_pay"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_payment"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

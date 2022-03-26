@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.gabriel.rickyandmorty.core.provideCharacterRepository
@@ -14,11 +15,12 @@ import co.gabriel.rickyandmorty.databinding.CharacterListFragmentBinding
 import co.gabriel.rickyandmorty.presentation.ScreenState
 import com.google.android.material.snackbar.Snackbar
 
-class CharacterListFragment : Fragment() {
+class CharacterListFragment : Fragment(), CharacterRecyclerViewAdapter.OnClickListener {
 
 
     private lateinit var viewModel: CharacterListViewModel
-
+    private var actualPrice: Int = 0
+    private var totalPrice: Int = 0
     private var _binding: CharacterListFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var characterAdapter: CharacterRecyclerViewAdapter
@@ -46,10 +48,9 @@ class CharacterListFragment : Fragment() {
                 factory = factory
             )[CharacterListViewModel::class.java]
             viewModel.findCharacters().observe(viewLifecycleOwner, Observer(::renderState))
-
         }
 
-        characterAdapter = CharacterRecyclerViewAdapter(emptyList())
+        characterAdapter = CharacterRecyclerViewAdapter(emptyList(), this)
 
         binding.characterListRecycle.apply {
             adapter = characterAdapter
@@ -83,4 +84,21 @@ class CharacterListFragment : Fragment() {
         characterAdapter.updateCharacters(list)
     }
 
+    private fun validateZero(actual: Int): Boolean{
+        return actual != 0
+    }
+
+    override fun onButtonAddClick(price: Int) {
+        actualPrice = binding.itemTotalPrice.text.toString().toInt()
+        totalPrice = actualPrice + price
+        binding.itemTotalPrice.text = totalPrice.toString()
+    }
+
+    override fun onButtonRemoveClick(price: Int, subtotal: Int) {
+        actualPrice = binding.itemTotalPrice.text.toString().toInt()
+        if (validateZero(actualPrice) && validateZero(subtotal)){
+            totalPrice = actualPrice - price
+            binding.itemTotalPrice.text = totalPrice.toString()
+        }
+    }
 }

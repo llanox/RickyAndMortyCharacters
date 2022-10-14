@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/character_items_constrain_layout"
     android:layout_height="86dp">
 
     <ImageView
+        android:contentDescription="@string/img_content_description"
         android:id="@+id/character_image"
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -24,6 +25,65 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/character_image"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/linear_layout_buttons">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_dollar_sign"/>
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_base_price"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_quantity_text"
+        app:layout_constraintBottom_toTopOf="@id/linear_layout_buttons"
+        app:layout_constraintStart_toStartOf="@id/linear_layout_buttons"/>
+
+    <LinearLayout
+        android:layout_width="125sp"
+        android:layout_height="60dp"
+        android:weightSum="3"
+        android:id="@+id/linear_layout_buttons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/character_items_constrain_layout">
+        
+        <Button
+            android:id="@+id/button_remove"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_height="match_parent"
+            android:text="@string/button_remove_text"/>
+        <TextView
+            android:id="@+id/tv_current"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:textSize="25sp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/tv_quantity_number"/>
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/button_add_text"/>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

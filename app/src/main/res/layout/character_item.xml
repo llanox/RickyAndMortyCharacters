@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/character_items_constrain_layout"
+    android:layout_width="match_parent"
     android:layout_height="86dp">
 
     <ImageView
-        android:contentDescription="@string/img_content_description"
         android:id="@+id/character_image"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/img_content_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,57 +32,70 @@
         android:paddingHorizontal="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/linear_layout_buttons">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_dollar_sign"/>
+            android:text="@string/tv_dollar_sign" />
+
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_base_price"/>
+            android:text="@string/tv_base_price" />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_quantity_text"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/linear_layout_buttons"
-        app:layout_constraintStart_toStartOf="@id/linear_layout_buttons"/>
+        app:layout_constraintStart_toStartOf="@id/linear_layout_buttons" />
 
     <LinearLayout
-        android:layout_width="125sp"
-        android:layout_height="60dp"
-        android:weightSum="3"
         android:id="@+id/linear_layout_buttons"
+        android:layout_width="130sp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="3sp"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/character_items_constrain_layout">
-        
+
         <Button
             android:id="@+id/button_remove"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textSize="25sp"
-            android:textColor="@color/black"
             android:layout_height="match_parent"
-            android:text="@string/button_remove_text"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:background="@drawable/button_left"
+            android:text="@string/button_remove_text"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_current_quantity"
             android:layout_width="0dp"
-            android:textColor="@color/white"
-            android:layout_weight="1"
-            android:textSize="25sp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/tv_quantity_number"/>
+            android:background="@color/design_default_color_primary"
+            android:text="@string/tv_quantity_number"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/button_add"
             android:layout_width="0dp"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/button_add_text"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:background="@drawable/button_right"
+            android:text="@string/button_add_text"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
 

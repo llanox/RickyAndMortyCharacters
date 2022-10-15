@@ -67,9 +67,9 @@
             android:layout_height="match_parent"
             android:text="@string/button_remove_text"/>
         <TextView
-            android:id="@+id/tv_current"
+            android:id="@+id/tv_current_quantity"
             android:layout_width="0dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:textSize="25sp"
             android:layout_height="match_parent"

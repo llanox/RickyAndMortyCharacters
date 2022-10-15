@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">RickyAndMortyCharacters</string>
 
-
-
-
+    <string name="total_price_text">This is a price</string>
     <string name="img_content_description">Image of the character</string>
     <string name="button_add_text">+</string>
     <string name="button_remove_text">-</string>

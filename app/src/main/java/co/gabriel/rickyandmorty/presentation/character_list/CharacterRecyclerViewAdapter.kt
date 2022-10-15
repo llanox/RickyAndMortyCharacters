@@ -10,7 +10,7 @@ import co.gabriel.rickyandmorty.data.model.Character
 import co.gabriel.rickyandmorty.databinding.CharacterItemBinding
 import com.bumptech.glide.Glide
 
-class CharacterRecyclerViewAdapter(private var characters: List<Character>) :
+class CharacterRecyclerViewAdapter(private var characters: List<Character>, private var tvTotalPrice: TextView) :
     RecyclerView.Adapter<CharacterRecyclerViewAdapter.ViewHolder>() {
 
 
@@ -42,16 +42,28 @@ class CharacterRecyclerViewAdapter(private var characters: List<Character>) :
             updateFields(holder, position)
         }
         holder.btnRemove.setOnClickListener{
-            --character.quantity
-            updateFields(holder, position)
+            if (character.quantity > 0){
+                --character.quantity
+                updateFields(holder, position)
+            }
         }
     }
 
-    fun updateFields(holder: ViewHolder, position: Int){
+    private fun updateTotal(){
+        var total = 0
+        characters.forEach { character ->
+            total += character.quantity * 12000
+        }
+
+        tvTotalPrice.text =  "\$$total"
+    }
+
+    private fun updateFields(holder: ViewHolder, position: Int){
         val character = characters[position]
         holder.quantity.text = character.quantity.toString()
         val currentPrice = (12000 * character.quantity)
         holder.price.text = currentPrice.toString()
+        updateTotal()
     }
 
 

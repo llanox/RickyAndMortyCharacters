@@ -49,7 +49,7 @@ class CharacterListFragment : Fragment() {
 
         }
 
-        characterAdapter = CharacterRecyclerViewAdapter(emptyList())
+        characterAdapter = CharacterRecyclerViewAdapter(emptyList(), binding.tvTotalPrice)
 
         binding.characterListRecycle.apply {
             adapter = characterAdapter

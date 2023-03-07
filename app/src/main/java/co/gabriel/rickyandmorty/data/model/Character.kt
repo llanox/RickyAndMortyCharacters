@@ -3,6 +3,7 @@ package co.gabriel.rickyandmorty.data.model
 import com.google.gson.annotations.SerializedName
 
 data class Character(
+    var quantity: Int = 0,
     @SerializedName("id")
     val id: String,
     @SerializedName("name")

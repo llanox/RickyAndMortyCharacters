@@ -33,6 +33,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    namespace 'co.gabriel.rickyandmorty'
 }
 
 dependencies {

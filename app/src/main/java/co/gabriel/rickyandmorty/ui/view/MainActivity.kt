@@ -1,4 +1,4 @@
-package co.gabriel.rickyandmorty.presentation
+package co.gabriel.rickyandmorty.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

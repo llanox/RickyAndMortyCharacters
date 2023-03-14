@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/character_items_constrain_layout"
     android:layout_width="match_parent"
+    android:padding="5dp"
     android:layout_height="86dp">
 
     <ImageView
@@ -22,7 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/robotobold"
+        app:layout_constraintStart_toEndOf="@id/character_image"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/character_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/robotobold"
         app:layout_constraintStart_toEndOf="@id/character_image"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,11 +45,7 @@
         app:layout_constraintEnd_toStartOf="@id/linear_layout_buttons">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_dollar_sign" />
-
-        <TextView
+            android:fontFamily="@font/robotobold"
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_quantity_text"
+        android:fontFamily="@font/robotoregular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/linear_layout_buttons"
         app:layout_constraintStart_toStartOf="@id/linear_layout_buttons" />
@@ -68,6 +76,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:fontFamily="@font/robotobold"
             android:textAlignment="center"
             android:background="@drawable/button_left"
             android:text="@string/button_remove_text"
@@ -82,6 +91,7 @@
             android:gravity="center"
             android:background="@color/design_default_color_primary"
             android:text="@string/tv_quantity_number"
+            android:fontFamily="@font/robotobold"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -94,6 +104,8 @@
             android:textAlignment="center"
             android:background="@drawable/button_right"
             android:text="@string/button_add_text"
+            android:fontFamily="@font/robotobold"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>

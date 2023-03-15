@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import co.gabriel.rickyandmorty.core.doubleToCurrency
 import co.gabriel.rickyandmorty.data.model.Character
 import co.gabriel.rickyandmorty.data.model.Basket
 import co.gabriel.rickyandmorty.databinding.CharacterItemBinding
@@ -96,10 +97,7 @@ class CharacterRecyclerViewAdapter(
         updateTotal()
     }
 
-    private fun doubleToCurrency(value: Double): String {
-        val formatter = DecimalFormat("#,###.##", DecimalFormatSymbols(Locale("es", "ES")))
-        return "$" + formatter.format(value)
-    }
+
 
     private fun activateDeleteButton(character: Character, holder: ViewHolder) {
         if (character.quantity == 1 && typeView == TYPE_VIEW_CHECKOUT) {
@@ -114,10 +112,10 @@ class CharacterRecyclerViewAdapter(
     private fun validateStatusOrPercentage(status: String): String {
         return if (typeView == TYPE_VIEW_CHECKOUT) {
             when (status) {
-                ALIVE -> "+$PERCENTAGE_20_STATUS%"
-                DEAD -> "-$PERCENTAGE_20_STATUS%"
-                UNKNOWN -> "$PERCENTAGE_0_STATUS%"
-                else -> "$PERCENTAGE_0_STATUS%"
+                ALIVE -> "+$PERCENTAGE_20_STATUS"
+                DEAD -> "-$PERCENTAGE_20_STATUS"
+                UNKNOWN -> PERCENTAGE_0_STATUS
+                else -> PERCENTAGE_0_STATUS
             }
         } else status
     }

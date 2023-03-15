@@ -1,4 +1,4 @@
-package co.gabriel.rickyandmorty.presentation.character_list
+package co.gabriel.rickyandmorty.ui.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,6 +12,8 @@ import co.gabriel.rickyandmorty.core.provideCharacterRepository
 import co.gabriel.rickyandmorty.data.model.Character
 import co.gabriel.rickyandmorty.databinding.CharacterListFragmentBinding
 import co.gabriel.rickyandmorty.presentation.ScreenState
+import co.gabriel.rickyandmorty.ui.viewmodel.CharacterListViewModel
+import co.gabriel.rickyandmorty.ui.viewmodel.CharacterListViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class CharacterListFragment : Fragment() {

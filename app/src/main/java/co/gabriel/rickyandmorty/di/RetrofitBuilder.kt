@@ -1,6 +1,7 @@
-package co.gabriel.rickyandmorty.data.network
+package co.gabriel.rickyandmorty.di
 
 import co.gabriel.rickyandmorty.BuildConfig
+import co.gabriel.rickyandmorty.data.network.CharacterAPIService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
     private const val BASE_URL = "https://rickandmortyapi.com/api/character/"
 
-    val characterAPIService : CharacterAPIService  by lazy {
+    val characterAPIService : CharacterAPIService by lazy {
         getRetrofit().create(CharacterAPIService::class.java)
     }
     private fun getRetrofit(): Retrofit {

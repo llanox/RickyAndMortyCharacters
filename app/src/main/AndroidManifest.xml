@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RickyAndMortyCharacters">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

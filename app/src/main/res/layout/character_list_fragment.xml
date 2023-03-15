@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,21 +11,45 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/tvTotalPrice"
+        app:layout_constraintBottom_toTopOf="@id/linear_layout_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTotalPrice"
+    <LinearLayout
+        android:padding="10dp"
+        android:id="@+id/linear_layout_buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/total_price_text"
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="3sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/character_list_recycle" />
+        app:layout_constraintEnd_toEndOf="@id/character_list_recycle">
+
+
+
+        <TextView
+            android:id="@+id/tvTotalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_quantity_number"
+            android:fontFamily="@font/robotoblack"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:fontFamily="@font/robotoregular"
+            android:id="@+id/tv_current_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@drawable/button_go"
+            android:text="@string/tv_go_the_basket"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

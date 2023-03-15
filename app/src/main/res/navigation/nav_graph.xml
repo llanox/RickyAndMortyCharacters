@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/CharacterListFragment"
-        android:name="co.gabriel.rickyandmorty.presentation.character_list.CharacterListFragment"
+        android:name="co.gabriel.rickyandmorty.ui.view.CharacterListFragment"
         tools:layout="@layout/team_list_fragment">
     </fragment>
 

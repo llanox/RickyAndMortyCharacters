@@ -10,4 +10,6 @@
     <string name="tv_dollar_sign">$</string>
     <string name="tv_base_price">12.000</string>
     <string name="tv_go_the_basket">Go to the basket</string>
+    <string name="tv_go_to_pay">Go to pay</string>
+    <string name="tv_subtotal">Subtotal</string>
 </resources>

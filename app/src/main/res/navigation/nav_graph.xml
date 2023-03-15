@@ -9,6 +9,18 @@
         android:id="@+id/CharacterListFragment"
         android:name="co.gabriel.rickyandmorty.ui.view.CharacterListFragment"
         tools:layout="@layout/team_list_fragment">
+        <action
+            android:id="@+id/action_CharacterListFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="co.gabriel.rickyandmorty.ui.view.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_CharacterListFragment"
+            app:destination="@id/CharacterListFragment" />
     </fragment>
 
 </navigation>

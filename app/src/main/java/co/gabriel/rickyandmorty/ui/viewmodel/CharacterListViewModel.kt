@@ -17,8 +17,7 @@ class CharacterListViewModel(private val characterRepository: CharacterRepositor
         emit(ScreenState.Loading())
         when (val result = characterRepository.fetchAllCharactersByPage(page)) {
             is Result.Success -> emit(ScreenState.Render(result.data, Action.RENDER_CHARACTERS))
-            is Result.Error -> emit(
-                ScreenState.Error(
+            is Result.Error -> emit(ScreenState.Error(
                     message = "$ERROR_FETCHING $page",
                     data = result.exception
                 )

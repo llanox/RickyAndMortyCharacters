@@ -22,8 +22,6 @@ import co.gabriel.rickyandmorty.util.Constants.PERCENTAGE_80
 import co.gabriel.rickyandmorty.util.Constants.TYPE_VIEW_CHECKOUT
 import co.gabriel.rickyandmorty.util.Constants.UNKNOWN
 import com.bumptech.glide.Glide
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
 import java.util.*
 
 class CharacterRecyclerViewAdapter(

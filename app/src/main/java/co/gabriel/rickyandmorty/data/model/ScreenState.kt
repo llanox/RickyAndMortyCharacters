@@ -1,4 +1,4 @@
-package co.gabriel.rickyandmorty.presentation
+package co.gabriel.rickyandmorty.data.model
 
 sealed class ScreenState<out T> (
     val data: T? = null,

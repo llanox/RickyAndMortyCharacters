@@ -2,7 +2,6 @@ package co.gabriel.rickyandmorty.ui.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.gabriel.rickyandmorty.core.provideCharacterRepository
 import co.gabriel.rickyandmorty.data.model.Character
 import co.gabriel.rickyandmorty.databinding.CharacterListFragmentBinding
-import co.gabriel.rickyandmorty.presentation.ScreenState
+import co.gabriel.rickyandmorty.data.model.ScreenState
 import co.gabriel.rickyandmorty.ui.viewmodel.CharacterListViewModel
 import co.gabriel.rickyandmorty.ui.viewmodel.CharacterListViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.fragment.findNavController
 import co.gabriel.rickyandmorty.R
+import co.gabriel.rickyandmorty.data.model.Basket
 import co.gabriel.rickyandmorty.util.Constants.BASKET
+import co.gabriel.rickyandmorty.util.Constants.ERROR_BASKET_EMPTY
 import co.gabriel.rickyandmorty.util.Constants.TYPE_VIEW_CHARACTER
 
-class CharacterListFragment : Fragment() {
+class CharacterListFragment : BaseFragment() {
 
     private lateinit var viewModel: CharacterListViewModel
     private var _binding: CharacterListFragmentBinding? = null
@@ -30,13 +30,14 @@ class CharacterListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CharacterListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         context?.apply {
 
             val factory =
@@ -51,7 +52,8 @@ class CharacterListFragment : Fragment() {
 
         }
 
-        characterAdapter = CharacterRecyclerViewAdapter(mutableListOf(), binding.tvTotalPrice, TYPE_VIEW_CHARACTER)
+        characterAdapter =
+            CharacterRecyclerViewAdapter(mutableListOf(), binding.tvTotalPrice, TYPE_VIEW_CHARACTER)
 
         binding.characterListRecycle.apply {
             adapter = characterAdapter
@@ -59,36 +61,46 @@ class CharacterListFragment : Fragment() {
         }
 
         binding.btnBasket.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putSerializable(BASKET, characterAdapter.getBasket())
-            findNavController().navigate(R.id.action_CharacterListFragment_to_checkoutFragment,bundle)
+            if (characterAdapter.getBasket().listcharacter.isNotEmpty()) {
+                val bundle = Bundle()
+                bundle.putSerializable(BASKET, characterAdapter.getBasket())
+                findNavController().navigate(
+                    R.id.action_CharacterListFragment_to_checkoutFragment,
+                    bundle
+                )
+            } else showError(ERROR_BASKET_EMPTY)
         }
 
     }
 
     private fun renderState(screenState: ScreenState<Any>) {
-
         when (screenState) {
             is ScreenState.Render -> showTeams(screenState.data as MutableList<Character>)
             is ScreenState.Error -> showError(screenState.message)
             is ScreenState.Loading -> showLoading()
         }
-
-    }
-
-    private fun showLoading() {
-        Snackbar.make(this.requireView(),"Loading..", Snackbar.LENGTH_LONG).show()
-
-    }
-
-    private fun showError(message: String?) {
-        if (message != null) {
-            Snackbar.make(this.requireView(),message,Snackbar.LENGTH_LONG).show()
-        }
     }
 
     private fun showTeams(list: MutableList<Character>) {
-        characterAdapter.updateCharacters(list)
+        characterAdapter.updateCharacters(valiteBasketList(list))
     }
 
+    private fun valiteBasketList(list: MutableList<Character>): MutableList<Character> {
+        val basketList = arguments?.getSerializable(BASKET) as? Basket
+        return if (basketList != null) {
+            if (basketList.listcharacter.isNotEmpty()) {
+                val listaAll = basketList.listcharacter + list
+                val characterList = listaAll.distinctBy { it.id }
+                    .groupBy { it.id }
+                    .map {
+                        it.value.maxBy { character ->
+                            basketList.listcharacter.contains(
+                                character
+                            )
+                        }
+                    }
+                characterList as MutableList<Character>
+            } else list
+        } else list
+    }
 }

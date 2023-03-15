@@ -35,6 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/robotobold"
+        android:textColor="@color/text"
         app:layout_constraintStart_toEndOf="@id/character_image"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,6 +49,7 @@
         <TextView
             android:fontFamily="@font/robotobold"
             android:id="@+id/tv_price"
+            android:textColor="@color/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_base_price" />
@@ -92,13 +94,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:fontFamily="@font/robotobold"
-            android:textAlignment="center"
-            android:background="@drawable/button_left"
-            android:text="@string/button_remove_text"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:background="@drawable/button_left"/>
 
         <TextView
             android:id="@+id/tv_current_quantity"

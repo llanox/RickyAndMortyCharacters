@@ -4,6 +4,7 @@
     android:id="@+id/character_items_constrain_layout"
     android:layout_width="match_parent"
     android:padding="5dp"
+    android:background="@color/white"
     android:layout_height="86dp">
 
     <ImageView
@@ -28,7 +29,7 @@
         app:layout_constraintStart_toEndOf="@id/character_image"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/character_status"
+        android:id="@+id/character_status_or_percentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -72,6 +73,22 @@
 
         <Button
             android:id="@+id/button_remove"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/robotobold"
+            android:textAlignment="center"
+            android:background="@drawable/button_left"
+            android:text="@string/button_remove_text"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:visibility="gone"
+            android:padding="9dp"
+            android:src="@drawable/delete_icon"
+            android:id="@+id/button_delete"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -61,7 +61,7 @@ class CharacterListFragment : BaseFragment() {
         }
 
         binding.btnBasket.setOnClickListener {
-            if (characterAdapter.getBasket().listcharacter.isNotEmpty()) {
+            if (characterAdapter.getBasket().listcharacters.isNotEmpty()) {
                 val bundle = Bundle()
                 bundle.putSerializable(BASKET, characterAdapter.getBasket())
                 findNavController().navigate(
@@ -88,13 +88,13 @@ class CharacterListFragment : BaseFragment() {
     private fun valiteBasketList(list: MutableList<Character>): MutableList<Character> {
         val basketList = arguments?.getSerializable(BASKET) as? Basket
         return if (basketList != null) {
-            if (basketList.listcharacter.isNotEmpty()) {
-                val listaAll = basketList.listcharacter + list
+            if (basketList.listcharacters.isNotEmpty()) {
+                val listaAll = basketList.listcharacters + list
                 val characterList = listaAll.distinctBy { it.id }
                     .groupBy { it.id }
                     .map {
                         it.value.maxBy { character ->
-                            basketList.listcharacter.contains(
+                            basketList.listcharacters.contains(
                                 character
                             )
                         }

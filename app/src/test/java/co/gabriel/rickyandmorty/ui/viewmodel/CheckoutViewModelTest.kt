@@ -25,10 +25,10 @@ class CheckoutViewModelTes {
         val mutableList:MutableList<Character> = mutableListOf()
         mutableList.add(Character(id="1", name = "yenifer",image="image", status = "status"))
 
-        val basket = Basket(listcharacter = mutableList)
+        val basket = Basket(listcharacters = mutableList)
         checkoutViewModel.listaBasket(basket)
 
-        assert(basket.listcharacter == checkoutViewModel.listCharacterModel.value)
+        assert(basket.listcharacters == checkoutViewModel.listCharacterModel.value)
     }
 
     @Test
@@ -46,7 +46,7 @@ class CheckoutViewModelTes {
         val mutableList:MutableList<Character> = mutableListOf()
         mutableList.add(Character(id="1", name = "yenifer",image="image", status = "status"))
 
-        val basket = Basket(listcharacter = mutableList)
+        val basket = Basket(listcharacters = mutableList)
         checkoutViewModel.getBasket(basket)
 
         assert(basket == checkoutViewModel.listBasket.value)

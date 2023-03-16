@@ -9,12 +9,12 @@ class CheckoutViewModel : ViewModel() {
     val listCharacterModel = MutableLiveData<MutableList<Character>>()
     val listBasket = MutableLiveData<Basket>()
     fun listaBasket(basket: Basket) {
-        if (basket.listcharacter.isNotEmpty()) listCharacterModel.postValue(basket.listcharacter)
+        if (basket.listcharacters.isNotEmpty()) listCharacterModel.postValue(basket.listcharacters)
         else listCharacterModel.postValue(mutableListOf<Character>())
     }
 
     fun getBasket(basket: Basket) {
-        if (basket.listcharacter.isNotEmpty()) listBasket.postValue(basket)
+        if (basket.listcharacters.isNotEmpty()) listBasket.postValue(basket)
         else listBasket.postValue(Basket())
     }
 }

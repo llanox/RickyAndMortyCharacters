@@ -83,7 +83,7 @@ class CharacterRecyclerViewAdapter(
             total += calculatePrice(character)
         }
         tvTotalPrice.text = doubleToCurrency(total)
-        basket.listcharacter = characters.filter { it.quantity > 0 } as MutableList<Character>
+        basket.listcharacters = characters.filter { it.quantity > 0 } as MutableList<Character>
     }
 
     private fun updateFields(holder: ViewHolder, position: Int) {

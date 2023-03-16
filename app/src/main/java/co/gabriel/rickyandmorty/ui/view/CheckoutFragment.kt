@@ -65,7 +65,7 @@ class CheckoutFragment : BaseFragment() {
         }
 
         viewModel.listCharacterModel.observe(viewLifecycleOwner) { listCharacter ->
-            this.basket.listcharacter = listCharacter
+            this.basket.listcharacters = listCharacter
             characterAdapter.updateCharacters(listCharacter)
         }
 

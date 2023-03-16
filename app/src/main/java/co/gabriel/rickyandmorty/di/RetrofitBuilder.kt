@@ -8,7 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    private const val BASE_URL = "https://rickandmortyapi.com/api/character/"
+    private const val END_POINT_CHARACTER = "character"
+    private const val BASE_URL = "https://rickandmortyapi.com/api/$END_POINT_CHARACTER/"
 
     val characterAPIService : CharacterAPIService by lazy {
         getRetrofit().create(CharacterAPIService::class.java)

@@ -21,3 +21,8 @@ data class CharacterResponse(
     @SerializedName("info") val info: Info,
     @SerializedName("results") val results: List<Character> = emptyList()
 )
+
+sealed class CharacterListItem {
+    data class Header(val letter: String) : CharacterListItem()
+    data class CharacterItem(val character: Character) : CharacterListItem()
+}

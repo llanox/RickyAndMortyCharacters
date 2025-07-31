@@ -43,9 +43,14 @@ class CheckoutFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         characterAdapter = CharacterRecyclerViewAdapter(
-            mutableListOf(), binding.tvTotalPrice,
+            mutableListOf(),
+            binding.tvTotalPrice,
             TYPE_VIEW_CHECKOUT
-        )
+        ){
+            //Aquí se ejecuta cuando el basket queda vacio
+
+            findNavController().popBackStack()
+        }
 
         binding.characterListRecycle.apply {
             adapter = characterAdapter

@@ -19,13 +19,21 @@ import co.gabriel.rickyandmorty.data.model.Basket
 import co.gabriel.rickyandmorty.util.Constants.BASKET
 import co.gabriel.rickyandmorty.util.Constants.ERROR_BASKET_EMPTY
 import co.gabriel.rickyandmorty.util.Constants.TYPE_VIEW_CHARACTER
+import java.util.Locale
+import androidx.appcompat.widget.SearchView
+
 
 class CharacterListFragment : BaseFragment() {
+    // Guarda la lista original para busquedas posteriores
+
+    private lateinit var originalList: List<Character>
+    // Nuevo adapter para la lista seccionada
+    private lateinit var sectionedAdapter: SectionedCharacterAdapter
+
 
     private lateinit var viewModel: CharacterListViewModel
     private var _binding: CharacterListFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var characterAdapter: CharacterRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,38 +60,98 @@ class CharacterListFragment : BaseFragment() {
 
         }
 
-        characterAdapter =
-            CharacterRecyclerViewAdapter(mutableListOf(), binding.tvTotalPrice, TYPE_VIEW_CHARACTER)
+        // 1) Inicializa el adapter de secciones
+        sectionedAdapter = SectionedCharacterAdapter(
+            items = emptyList(),
+            tvTotalPrice = binding.tvTotalPrice
+        )
 
-        binding.characterListRecycle.apply {
-            adapter = characterAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+                    binding.characterListRecycle.apply {
+                adapter = sectionedAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+
+        //Listener sobre SearchView
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String) = false
+            override fun onQueryTextChange(text: String): Boolean {
+                //Filtramos la lista original
+                val filtered = originalList
+                    .filter { it.name.contains(text, ignoreCase = true) }
+
+                if (filtered.isEmpty()) {
+                    // Sin resultados
+                    binding.characterListRecycle.visibility = View.GONE
+                    binding.tvEmptyState.visibility = View.VISIBLE
+                } else {
+                    // Hay resultados
+                    binding.tvEmptyState.visibility = View.GONE
+                    binding.characterListRecycle.visibility = View.VISIBLE
+                }
+
+                //Actualizamos secciones con el filtrado
+
+                val items = sectionedList(filtered)
+                sectionedAdapter.updateItems(items)
+                return true
+            }
+        })
 
         binding.btnBasket.setOnClickListener {
-            if (characterAdapter.getBasket().listcharacters.isNotEmpty()) {
-                val bundle = Bundle()
-                bundle.putSerializable(BASKET, characterAdapter.getBasket())
+            val currentBasket = sectionedAdapter.getBasket()
+            if (currentBasket.listcharacters.isNotEmpty()) {
+                val bundle = Bundle().apply {
+                    putSerializable(BASKET, currentBasket)
+                }
                 findNavController().navigate(
                     R.id.action_CharacterListFragment_to_checkoutFragment,
                     bundle
                 )
-            } else showError(ERROR_BASKET_EMPTY)
+
+            }else showError(ERROR_BASKET_EMPTY)
         }
+
+
 
     }
 
     private fun renderState(screenState: ScreenState<Any>) {
         when (screenState) {
-            is ScreenState.Render -> showTeams(screenState.data as MutableList<Character>)
-            is ScreenState.Error -> showError(screenState.message)
-            is ScreenState.Loading -> showLoading()
+            is ScreenState.Render-> {
+            val list = screenState.data as MutableList<Character>
+            originalList = list
+            showSectionedList(list)
+
+            }
+            is ScreenState.Error  -> showError(screenState.message)
+            is ScreenState.Loading-> showLoading()
+
         }
     }
 
-    private fun showTeams(list: MutableList<Character>) {
-        characterAdapter.updateCharacters(valiteBasketList(list))
+    //Metodo para generar la lista seleccionada
+
+    private fun sectionedList(list: List<Character>): List<SectionItem> {
+        return list
+            .sortedBy { it.name.lowercase(Locale.getDefault()) }
+            .groupBy {
+                // Usa '#' para indefinidos, o adapta a tu criterio
+                it.name.firstOrNull()?.uppercaseChar() ?: '#'
+            }
+            .flatMap { (letter, chars) ->
+                listOf(SectionItem.Header(letter)) +
+                        chars.map { SectionItem.CharacterEntry(it) }
+            }
     }
+
+
+    // 3) Reemplaza showTeams por showSectionedList
+    private fun showSectionedList(list: List<Character>) {
+        val items = sectionedList(list)
+        sectionedAdapter.updateItems(items)
+    }
+
 
     private fun valiteBasketList(list: MutableList<Character>): MutableList<Character> {
         val basketList = arguments?.getSerializable(BASKET) as? Basket

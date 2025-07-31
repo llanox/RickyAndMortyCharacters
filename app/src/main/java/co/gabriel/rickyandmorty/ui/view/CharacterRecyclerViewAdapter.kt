@@ -27,7 +27,9 @@ import java.util.*
 class CharacterRecyclerViewAdapter(
     private var characters: MutableList<Character>,
     private var tvTotalPrice: TextView,
-    private var typeView: String
+    private var typeView: String,
+    private val onBasketEmpty: () -> Unit = {}
+
 ) :
     RecyclerView.Adapter<CharacterRecyclerViewAdapter.ViewHolder>() {
     private var basket = Basket()
@@ -83,7 +85,11 @@ class CharacterRecyclerViewAdapter(
             total += calculatePrice(character)
         }
         tvTotalPrice.text = doubleToCurrency(total)
-        basket.listcharacters = characters.filter { it.quantity > 0 } as MutableList<Character>
+        basket.listcharacters = characters.filter { it.quantity > 0 }.toMutableList()
+
+        if(typeView == TYPE_VIEW_CHECKOUT && basket.listcharacters.isEmpty()) {
+            onBasketEmpty()
+        }
     }
 
     private fun updateFields(holder: ViewHolder, position: Int) {

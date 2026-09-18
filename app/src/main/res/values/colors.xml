@@ -9,5 +9,7 @@
     <color name="text">#858585</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorprimary">#2bd384</color>
+    <color name="light">#F0F0F0</color>
+
 
 </resources>
